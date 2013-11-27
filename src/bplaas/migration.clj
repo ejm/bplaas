@@ -1,4 +1,4 @@
-(ns shouter.models.migration
+(ns bplaas.migration
   (:require [clojure.java.jdbc :as sql]))
 
 (defn create-pickup-lines []
@@ -29,8 +29,7 @@
 
 (defn load-data
   [csv-filename]
-  (map insert-data (map get-data-from-line (read-csv-file csv-filename))))
-
+  (map #(insert-data (get-data-from-line %)) (read-csv-file csv-filename))
 
 (defn -main []
   (print "Creating database structure...") (flush)
