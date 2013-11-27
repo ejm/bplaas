@@ -1,5 +1,7 @@
 (ns bplaas.migration
-  (:require [clojure.java.jdbc :as sql]))
+  (:require [clojure.data.csv :as csv]
+            [clojure.java.io :as io]
+            [clojure.java.jdbc :as sql]))
 
 (defn create-pickup-lines []
   (sql/with-connection (System/getenv "DATABASE_URL")
@@ -20,19 +22,18 @@
     (doall
       (csv/read-csv in-file :separator \tab))))
 
-(def insert-data
+(defn insert-data
   "inserts a single pickup line and source into the database"
   [pickup-line]
   (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/insert-record :pickuplines pickup-line))
-  )
+    (sql/insert-record :pickuplines pickup-line)))
 
 (defn load-data
   [csv-filename]
-  (map #(insert-data (get-data-from-line %)) (read-csv-file csv-filename))
+  (map #(insert-data (get-data-from-line %)) (read-csv-file csv-filename)))
 
 (defn -main []
-  (print "Creating database structure...") (flush)
+  (println "Creating database structure...")
   (create-pickup-lines)
   (load-data "pu_lines.csv")
   (println " done"))
