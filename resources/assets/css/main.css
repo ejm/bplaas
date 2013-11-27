@@ -108,11 +108,14 @@ a:after {
 
 #features {
 	padding-top: 50px;
-	padding-bottom: 50px;
 }
 
 #features .ac a{
 	font-size: 20px;
+}
+
+#api {
+	padding-bottom: 50px;
 }
 
 /* Showcase Wrap */
