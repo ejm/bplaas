@@ -4,7 +4,7 @@
             [clojure.java.jdbc :as sql]))
 
 (defn create-pickup-lines []
-  (sql/with-connection (System/getenv "DATABASE_URL")
+  (sql/with-connection (System/getenv "HEROKU_POSTGRESQL_SILVER_URL")
     (sql/create-table :pickuplines
       [:id :serial "PRIMARY KEY"]
       [:pickup_line :varchar "NOT NULL"]
@@ -24,7 +24,7 @@
 (defn insert-data
   "inserts a single pickup line and source into the database"
   [pickup-line]
-  (sql/with-connection (System/getenv "DATABASE_URL")
+  (sql/with-connection (System/getenv "HEROKU_POSTGRESQL_SILVER_URL")
     (sql/insert-record :pickuplines pickup-line)))
 
 (defn load-data
