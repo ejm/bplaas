@@ -17,9 +17,10 @@
                   :pickup_line "test"
                   :twitter_source "blah"
                   }))
-  (GET "/" [] 
-       "home")
-  (route/not-found (json-str {:error "not found"})))
+  (GET "/" [] (resp/file-response "index.html" {:root "resources"}))
+  (route/files "/" {:root "resources"})
+  (route/not-found (json-str {:error "not found"}))
+)
 
 (defn init []
   )
@@ -28,11 +29,7 @@
   )
 
 (def app
-  (->
-   (handler/site app-routes)
-   (wrap-json-body)
-   (wrap-json-params)
-   (wrap-json-response)))
+  (handler/site app-routes))
 
 
 (defn -main
