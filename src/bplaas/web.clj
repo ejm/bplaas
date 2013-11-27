@@ -12,6 +12,11 @@
 
 (defroutes app-routes
 
+  (GET "/pickup-line" []
+       (json-str {
+                  :pickup_line "test"
+                  :twitter_source "blah"
+                  }))
   (GET "/" [] 
        "home")
   (route/not-found (json-str {:error "not found"})))
