@@ -33,6 +33,7 @@
 
 (defn -main []
   (println "Creating database structure...")
+  (println (str "database url " (System/getenv "DATABASE_URL")))
   (create-pickup-lines)
   (load-data "pu_lines.csv")
   (println " done"))
