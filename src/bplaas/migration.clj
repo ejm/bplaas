@@ -29,11 +29,12 @@
 
 (defn load-data
   [csv-filename]
-  (doall (map #(insert-data (get-data-from-line %)) (read-csv-file csv-filename))))
+  ; the first line of the csv file has the headers
+  (doall (map #(insert-data (get-data-from-line %)) (rest (read-csv-file csv-filename)))))
 
 (defn -main []
   (println "Creating database structure...")
-  (println (str "database url " (System/getenv) "."))
+  (println (str "database url " (System/getenv "HEROKU_POSTGRESQL_SILVER_URL") "."))
   (create-pickup-lines)
   (load-data "pu_lines.csv")
   (println " done"))
