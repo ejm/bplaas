@@ -4,7 +4,9 @@
             [clojure.java.jdbc :as sql]))
 
 (defn create-pickup-lines []
+  ; drop the table to ensure it doesn't exist
   (sql/with-connection (System/getenv "HEROKU_POSTGRESQL_SILVER_URL")
+    (try (sql/drop-table :pickuplines) (catch Exception e (str "Database table didn't exist")))
     (sql/create-table :pickuplines
       [:id :serial "PRIMARY KEY"]
       [:pickup_line :varchar "NOT NULL"]
@@ -19,7 +21,7 @@
   [csv-filename]
   (with-open [in-file (io/reader csv-filename)]
     (doall
-      (csv/read-csv in-file :separator \tab))))
+      (csv/read-csv in-file))))
 
 (defn insert-data
   "inserts a single pickup line and source into the database"
