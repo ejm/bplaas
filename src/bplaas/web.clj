@@ -21,10 +21,6 @@
 (defroutes app-routes
 
   (GET "/pickup-line" []
-       ; (json-str {
-       ;            :pickup_line "test"
-       ;            :twitter_source "blah"
-       ;            }))
     (json-str (first (get-random-pickup-line))))
   (GET "/" [] (resp/file-response "index.html" {:root "resources"}))
   (route/files "/" {:root "resources"})
