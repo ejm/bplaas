@@ -15,7 +15,7 @@
   []
   (sql/with-connection (System/getenv "HEROKU_POSTGRESQL_SILVER_URL")
     (sql/with-query-results results
-      ["select pickup_line, twitter_source from pickuplines offset random() * (select count(*) from pickuplines) limit 1;"]
+      ["select pickup_line from pickuplines offset random() * (select count(*) from pickuplines) limit 1;"]
       (into [] results))))
 
 (defroutes app-routes

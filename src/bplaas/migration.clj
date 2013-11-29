@@ -9,13 +9,12 @@
     (try (sql/drop-table :pickuplines) (catch Exception e (str "Database table didn't exist")))
     (sql/create-table :pickuplines
       [:id :serial "PRIMARY KEY"]
-      [:pickup_line :varchar "NOT NULL"]
-      [:twitter_source :varchar "NOT NULL"])))
+      [:pickup_line :varchar "NOT NULL"])))
 
 (defn get-data-from-line
   "Gets the actual pickup line and twitter source from the csv line"
   [v]
-  {:pickup_line (nth v 2), :twitter_source (nth v 0)})
+  {:pickup_line (nth v 0)})
 
 (defn read-csv-file
   [csv-filename]
