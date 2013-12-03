@@ -29,6 +29,10 @@ p {
     text-align: center;
 }
 
+.white {
+    color: #FFF;
+}
+
 /* Links */
 a {
     color: #3bc492;
@@ -99,6 +103,8 @@ a:after {
 	color: white
 }
 
+
+
 /* intro Wrap */
 
 #intro {
@@ -161,3 +167,7 @@ a:after {
 	color: white
 }
 
+#item h3 {
+	font-size: 28px;
+	color: white;
+}
