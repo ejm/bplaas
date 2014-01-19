@@ -8,8 +8,7 @@ function updatePickupLine() {
 }
 
 function getPickupLine(element) {
-    $.getJSON( "/pickup-line", function( data ) {
-        
+    $.getJSON( "/pickup-line", function( data ) {        
         element(data.pickup_line);
     });
 }
